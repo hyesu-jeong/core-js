@@ -142,7 +142,74 @@ const randomUser = {
 const keys = Object.keys(arrayLike);
 const values = Object.values(arrayLike);
 const entries = Object.entries(arrayLike);
-
+/* 
 for (let keyValue of entries) {
-  console.log(keyValue);
+  let key = keyValue[0];
+  let value = keyValue[1];
+  console.log(key, value);
+} */
+
+Object.prototype.nickname = 'tiger';
+
+function hasProperty(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
 }
+
+console.time()
+
+/* ---------------- for ... in ---------------- */
+/* 
+for (let key in randomUser) {
+  if (hasProperty(randomUser, key)) {
+    const L1 = randomUser[key];
+
+    console.log('\tL1 : ', L1);
+
+    if (typeof L1 === 'object') {
+      for (let key in L1) {
+        if (hasProperty(L1, key)) {
+          const L2 = L1[key];
+          console.log('\t\tL2 : ', L2);
+
+          if (typeof L2 === 'object') {
+            for (let key in L2) {
+              if (hasProperty(L2, key)) {
+                const L3 = L2[key];
+
+                console.log('\t\t\tL3 : ', L3);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} */
+
+/* ---------------- for ... of ---------------- */
+for (let keyValue of Object.entries(randomUser)) {
+  let key = keyValue[0];
+  let value = keyValue[1];
+  console.log('\tL1 : ', value);
+  if (typeof value === 'object') {
+    for (let keyValue of Object.entries(value)) {
+      let key = keyValue[0];
+      let value = keyValue[1];
+      console.log('\t\tL2 : ', value);
+
+      if (typeof value === 'object') {
+        for (let keyValue of Object.entries(value)) {
+          let key = keyValue[0];
+          let value = keyValue[1];
+
+          console.log('\t\t\tL3 : ', value);
+        }
+      }
+    }
+  }
+}
+
+console.timeEnd()
+
+// 재귀 함수 : 반복되는 코드를 재사용하기 위한 함수
+
