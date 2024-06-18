@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/tiger.svg" type="image/x-icon" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./lib/dom/getNode.js"></script>
     <script src="./lib/utils/type.js"></script>
-    <script defer src="./chapter/dom/01.BOM.js"></script>
+    <script defer src="./chapter/dom/02.DOM.js"></script>
   </head>
   <body>
     <h1>
@@ -16,15 +17,19 @@
       <span class="third">bye</span>
       <ul></ul>
     </h1>
-    <!-- --------------- TODO 리스트 ---------------- -->
-    <div>
-      <label for="todo">할일</label>
-      <input type="text" id="todo" />
-      <button class="register">등록</button>
+    <!-- --------------- 문서 대상 찾기 ---------------- -->
+    <section id="visual-section">
+      <ul class="list">
+        <li>home</li>
+        <li>about</li>
+        <li>contact</li>
+      </ul>
 
-      <h4>해야할 목록</h4>
-      <ul class="todoList"></ul>
-    </div>
+      <form name="search-box">
+        <label for="search">검색</label>
+        <input type="text" id="search" />
+      </form>
+    </section>
 
     <hr />
   </body>
