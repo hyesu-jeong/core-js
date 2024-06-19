@@ -12,6 +12,14 @@ const type = {
   isMath: true,
   isUndefined: true,
   isNull: true,
+  getNode: true,
+  getNOdes: true,
+  insertLast: true,
+  attr: true,
+  css: true,
+  bindEvent: true,
+  addClass: true,
+  removeClass: true,
 };
 
 export default [
@@ -21,11 +29,10 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...type,
-        getNode: true,
-        getNodes: true,
+        ...ignore,
       },
     },
+
     rules: {
       'no-unused-vars': 'warn',
     },

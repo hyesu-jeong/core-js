@@ -116,8 +116,12 @@ function setAttr(node, prop, value) {
     return; // value가 공란일 경우 여기까지만 값을 반환하고, 이후에 있는 코드는 읽지 않음.
   }
 
-  // 미니 과제: prop에 data가 있다면 dataset으로 넣기
-  // 
+  // prop에 data가 있다면 dataset으로 넣기
+    if (prop.startsWith('data')) {
+      prop = prop.slice(5);
+      node.dataset[prop] = value;
+      return;
+    }
 
   if(!value) throw new ReferenceError('setAttr 함수의 세 번째 인수는 필수 입력값 입니다.')
 
