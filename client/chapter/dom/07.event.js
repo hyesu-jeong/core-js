@@ -149,3 +149,10 @@ function throttle(callback, limit = 200) {
 }
 
 ground.addEventListener('mousemove', throttle(handleMove));
+
+
+/* --------------- css.js에 addClass 함수 테스트 --------------- */
+addClass('.ground', ['a', 'b', 'c']);
+addClass('.ground', 'a', 'b', 'c');
+addClass('.ground', 'a,b,c');
+addClass('.ground', { a: 'one', b: 'two' });
