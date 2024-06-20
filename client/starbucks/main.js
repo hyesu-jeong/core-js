@@ -1,23 +1,9 @@
 
 
-/* const aList = document.querySelectorAll('nav a');
-const depthList = document.querySelectorAll('.depth');
-
-aList.forEach((a) => {
-  a.addEventListener('mouseenter', () => {
-    const target = a.lastElementChild;
-
-    // 모든 depth 높이를 0
-    depthList.forEach((depth) => {
-      depth.style.height = '0';
-    });
-
-    // 마우스가 올라간 a의 depth 높이를 100px
-    target.style.height = '100px';
-  });
-}) */
 
 
+
+/* 
 const aList = document.querySelectorAll('nav a');
 const depthList = document.querySelectorAll('.depth');
 const header = document.querySelector('#header');
@@ -38,4 +24,26 @@ aList.forEach((a) => {
 });
 
 
-header.addEventListener('mouseleave', () => depthList.forEach(h))
+header.addEventListener('mouseleave', () => depthList.forEach(h)) */
+
+
+/* --------------------------------------------------- */
+/*                GSAP 으로 만들어 보기                */
+/* --------------------------------------------------- */
+
+/* global gsap */
+
+const aList = document.querySelectorAll('nav a');
+
+aList.forEach((a) => {
+
+  const target = a.lastElementChild;
+
+  const tl = gsap.timeline({paused:true})
+    .to(target, {height:100,ease: "power3.inOut"})
+
+  
+  a.addEventListener('mouseenter', () => tl.play())
+  a.addEventListener('mouseleave', () => tl.reverse())
+  
+})
