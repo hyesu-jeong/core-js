@@ -1,6 +1,12 @@
 /* global gsap */
 
-import { getNode, tiger, xhrPromise, renderUserCard } from './lib/index.js';
+import {
+  getNode,
+  tiger,
+  xhrPromise,
+  renderUserCard,
+  changeColor,
+} from './lib/index.js';
 
 const getData = async () => {
   const data = await xhrPromise.get(
@@ -31,6 +37,24 @@ async function renderUserList() {
   const data = response.data; // data는 배열
 
   data.forEach((user) => renderUserCard(userCardInner, user)); // 배열에 접근하기 위해 forEach
+
+  changeColor('.user-card');
+
+  gsap.from('.user-card', {
+    x: 100,
+    opacity: 0,
+    stagger: {
+      // stagger: 순서대로 나오는 거
+      // each: 0.1,
+      amount: 1, // 1초안에 다 나오는 거
+      form: 'start', // 어디서 부터 시작할지 'center','edge', 'end' 도 있음
+    },
+  });
 }
 
 renderUserList();
+
+/* ----------- gsap 애니메이션 from/to ----------- */
+// form : -부터 / 현재위치 스타일 잡고 여기서부터 모션 시작
+// to : -까지 / 작성한 스타일 잡고 여기까지 완료
+// set : 애니메이션이랑 관련없이 세팅만 해주는 거
