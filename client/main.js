@@ -32,24 +32,28 @@ const ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 const userCardInner = getNode('.user-card-inner');
 
 async function renderUserList() {
-  const response = await tiger.get(ENDPOINT);
+  try {
+    const response = await tiger.get(ENDPOINT);
 
-  const data = response.data; // data는 배열
+    const data = response.data; // data는 배열
 
-  data.forEach((user) => renderUserCard(userCardInner, user)); // 배열에 접근하기 위해 forEach
+    data.forEach((user) => renderUserCard(userCardInner, user)); // 배열에 접근하기 위해 forEach
 
-  changeColor('.user-card');
+    changeColor('.user-card');
 
-  gsap.from('.user-card', {
-    x: 100,
-    opacity: 0,
-    stagger: {
-      // stagger: 순서대로 나오는 거
-      // each: 0.1,
-      amount: 1, // 1초안에 다 나오는 거
-      form: 'start', // 어디서 부터 시작할지 'center','edge', 'end' 도 있음
-    },
-  });
+    gsap.from('.user-card', {
+      x: 100,
+      opacity: 0,
+      stagger: {
+        // stagger: 순서대로 나오는 거
+        // each: 0.1,
+        amount: 1, // 1초안에 다 나오는 거
+        form: 'start', // 어디서 부터 시작할지 'center','edge', 'end' 도 있음
+      },
+    });
+  } catch {
+    console.error('에러가 발생했습니다!');
+  }
 }
 
 renderUserList();
