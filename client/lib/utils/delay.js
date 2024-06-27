@@ -134,15 +134,15 @@ async function 라면끓이기() {
 // 라면끓이기();
 
 /* --------------- 포켓몬 데이터 가져오기 --------------- */
-async function getData() {
-  const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/175');
+// async function getData() {
+//   const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/175');
 
-  console.log(data.sprites.other.showdown['front_default']);
+//   console.log(data.sprites.other.showdown['front_default']);
 
-  insertLast(
-    document.body,
-    `<img src = "${data.sprites.other.showdown['front_default']}" alt="" />`
-  );
-}
+//   insertLast(
+//     document.body,
+//     `<img src = "${data.sprites.other.showdown['front_default']}" alt="" />`
+//   );
+// }
 
-getData();
+// getData();
