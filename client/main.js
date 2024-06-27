@@ -3,9 +3,12 @@
 import {
   getNode,
   tiger,
+  delayP,
   xhrPromise,
   renderUserCard,
   changeColor,
+  renderSpinner,
+  renderEmptyCard,
 } from './lib/index.js';
 
 const getData = async () => {
@@ -32,7 +35,21 @@ const ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 const userCardInner = getNode('.user-card-inner');
 
 async function renderUserList() {
+  // 로딩 스피너 렌더링
+  renderSpinner(userCardInner);
+
+  await delayP(2000);
+
   try {
+    gsap.to('.loadingSpinner', {
+      opacity: 0,
+      onComplete() {
+        // gsap 애니메이션이 끝난 지점알려줌. 순수 js는 transition end가 있음.
+        // getNode('.loadingSpinner').remove();
+        this._targets[0].remove(); // 로딩 지워주는 코드 위에 코드와 동일하게 작동함.
+      },
+    });
+
     const response = await tiger.get(ENDPOINT);
 
     const data = response.data; // data는 배열
@@ -53,6 +70,7 @@ async function renderUserList() {
     });
   } catch {
     console.error('에러가 발생했습니다!');
+    renderEmptyCard(userCardInner);
   }
 }
 
