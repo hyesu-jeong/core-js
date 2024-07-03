@@ -1,23 +1,37 @@
-class MyElement extends HTMLElement {
+class Button extends HTMLElement {
   constructor() {
     super();
+    this.button = document.querySelector('button'); //'this.button'이 변수이다.
+    // console.log(this.button); // <button>btn</button>
   }
 
   connectedCallback() {
-    // 커스텀 태그가 생겼을 때. 딱 1회 호출함.
-    console.log('탄생함');
+    this._render();
   }
 
-  disconnectedCallback() {
-    // 커스텀 태그가 없어졌을 때
-    console.log('죽음');
+  disconnectedCallback() {}
+
+  static get observedAttributes() {
+    // 'id'값을 관찰함
+    return ['id'];
+  }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      this._render();
+    }
+  }
+
+  _render() {
+    this.button.textContent = this.id;
   }
 }
 
-customElements.define('c-element', MyElement); // define 정의를 해줘야 사용 가능.
+customElements.define('c-button', Button);
 
-const elem = document.createElement('c-element');
+const c = document.querySelector('c-button');
 
-const app = document.getElementById('app');
+let count = 0;
 
-app.appendChild(elem);
+c.addEventListener('click', () => {
+  c.setAttribute('id', ++count);
+});
