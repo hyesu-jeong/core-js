@@ -1,17 +1,22 @@
-const template = document.createElement('template');
+class UserCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = /* html */ `
+    <style>
+      :host {
+      background-color: orange;
+    }
+    </style>
+        <div> nickName : kind-tiger </div>
+        <slot name="username"></slot>
+        <slot name="age"></slot>
+        <slot name="gender"></slot>
+        <slot name="common"></slot>
+        <slot></slot>
+        <slot name="email">any@naver.com</slot>
+    `;
+  }
+}
 
-template.classList.add('temp');
-template.setAttribute;
-template.innerHTML = /* html */ `
-<div>bye</div>
-<div>JavaScript</div>
-`;
-
-console.log(template);
-
-const app = document.querySelector('#app');
-const temp = document.querySelector('#temp');
-
-const clone = temp.content.cloneNode(true);
-
-app.appendChild(clone);
+customElements.define('user-card', UserCard);
